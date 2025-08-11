@@ -91,9 +91,9 @@ def main():
     pop_size = st.sidebar.selectbox("Population Size", [25, 50, 100, 200], index=1)
     generations = st.sidebar.selectbox("Generations", [25, 50, 100, 200], index=1)
     
-    # AI Interpretation Settings
+    # Interpretation Settings
     st.sidebar.subheader("🤖 AI Analysis Settings")
-    enable_ai = st.sidebar.checkbox("Enable AI Interpretations", value=True, 
+    enable_ai = st.sidebar.checkbox("Enable Interpretations", value=True, 
                                    help="Generate natural language explanations of results")
     interpretation_detail = st.sidebar.select_slider(
         "Analysis Detail Level",
@@ -335,7 +335,7 @@ def main():
                     from ai_interpreter import OptimizationInterpreter
                     interpreter = OptimizationInterpreter(dams)
                     
-                    # Generate AI interpretation
+                    # Generate Interpretation
                     interpretation = interpreter.interpret_optimization_results(
                         result, weights, time_horizon
                     )
@@ -372,11 +372,11 @@ def main():
                             st.markdown(interpretation.technical_notes)
                 
                 # Results visualization
-                st.subheader("📊 Optimization Results" + (" with AI Interpretation" if enable_ai else ""))
+                st.subheader("📊 Optimization Results" + (" with Interpretation" if enable_ai else ""))
                 
                 if enable_ai:
-                    # Charts with AI interpretations
-                    # Reservoir levels chart with AI interpretation
+                    # Charts with Interpretations
+                    # Reservoir levels chart with Interpretation
                     col_chart, col_explain = st.columns([2, 1])
                     
                     with col_chart:
@@ -403,11 +403,11 @@ def main():
                         st.plotly_chart(fig_levels, use_container_width=True)
                     
                     with col_explain:
-                        st.markdown("### 🤖 AI Interpretation")
+                        st.markdown("### 🤖 Interpretation")
                         levels_interpretation = interpreter.interpret_reservoir_levels_chart(result, time_horizon)
                         st.markdown(levels_interpretation)
                     
-                    # Power generation chart with AI interpretation
+                    # Power generation chart with Interpretation
                     col_chart2, col_explain2 = st.columns([2, 1])
                     
                     with col_chart2:
@@ -433,11 +433,11 @@ def main():
                         st.plotly_chart(fig_power, use_container_width=True)
                     
                     with col_explain2:
-                        st.markdown("### 🤖 AI Interpretation")
+                        st.markdown("### 🤖 Interpretation")
                         power_interpretation = interpreter.interpret_power_generation_chart(result, weights)
                         st.markdown(power_interpretation)
                     
-                    # Water releases chart with AI interpretation
+                    # Water releases chart with Interpretation
                     col_chart3, col_explain3 = st.columns([2, 1])
                     
                     with col_chart3:
@@ -462,11 +462,11 @@ def main():
                         st.plotly_chart(fig_releases, use_container_width=True)
                     
                     with col_explain3:
-                        st.markdown("### 🤖 AI Interpretation")
+                        st.markdown("### 🤖 Interpretation")
                         releases_interpretation = interpreter.interpret_water_releases_chart(result)
                         st.markdown(releases_interpretation)
                 else:
-                    # Standard charts without AI interpretation
+                    # Standard charts without Interpretation
                     # Reservoir levels chart
                     fig_levels = go.Figure()
                     
