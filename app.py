@@ -25,7 +25,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Cache initialization
-@st.cache_resource
+@st.cache_resource(ttl=3600)
 def initialize_system():
     """Initialize dam specifications and weather manager"""
     dams = NileCascadeDams()
@@ -91,9 +91,9 @@ def main():
     pop_size = st.sidebar.selectbox("Population Size", [25, 50, 100, 200], index=1)
     generations = st.sidebar.selectbox("Generations", [25, 50, 100, 200], index=1)
     
-    # Interpretation Settings
+    # AI Interpretation Settings
     st.sidebar.subheader("🤖 AI Analysis Settings")
-    enable_ai = st.sidebar.checkbox("Enable Interpretations", value=True, 
+    enable_ai = st.sidebar.checkbox("Enable AI Interpretations", value=True, 
                                    help="Generate natural language explanations of results")
     interpretation_detail = st.sidebar.select_slider(
         "Analysis Detail Level",
@@ -335,7 +335,7 @@ def main():
                     from ai_interpreter import OptimizationInterpreter
                     interpreter = OptimizationInterpreter(dams)
                     
-                    # Generate Interpretation
+                    # Generate AI interpretation
                     interpretation = interpreter.interpret_optimization_results(
                         result, weights, time_horizon
                     )
@@ -372,11 +372,11 @@ def main():
                             st.markdown(interpretation.technical_notes)
                 
                 # Results visualization
-                st.subheader("📊 Optimization Results" + (" with Interpretation" if enable_ai else ""))
+                st.subheader("📊 Optimization Results" + (" with AI Interpretation" if enable_ai else ""))
                 
                 if enable_ai:
-                    # Charts with Interpretations
-                    # Reservoir levels chart with Interpretation
+                    # Charts with AI interpretations
+                    # Reservoir levels chart with AI interpretation
                     col_chart, col_explain = st.columns([2, 1])
                     
                     with col_chart:
@@ -403,11 +403,11 @@ def main():
                         st.plotly_chart(fig_levels, use_container_width=True)
                     
                     with col_explain:
-                        st.markdown("### 🤖 Interpretation")
+                        st.markdown("### 🤖 AI Interpretation")
                         levels_interpretation = interpreter.interpret_reservoir_levels_chart(result, time_horizon)
                         st.markdown(levels_interpretation)
                     
-                    # Power generation chart with Interpretation
+                    # Power generation chart with AI interpretation
                     col_chart2, col_explain2 = st.columns([2, 1])
                     
                     with col_chart2:
@@ -433,11 +433,11 @@ def main():
                         st.plotly_chart(fig_power, use_container_width=True)
                     
                     with col_explain2:
-                        st.markdown("### 🤖 Interpretation")
+                        st.markdown("### 🤖 AI Interpretation")
                         power_interpretation = interpreter.interpret_power_generation_chart(result, weights)
                         st.markdown(power_interpretation)
                     
-                    # Water releases chart with Interpretation
+                    # Water releases chart with AI interpretation
                     col_chart3, col_explain3 = st.columns([2, 1])
                     
                     with col_chart3:
@@ -462,11 +462,11 @@ def main():
                         st.plotly_chart(fig_releases, use_container_width=True)
                     
                     with col_explain3:
-                        st.markdown("### 🤖 Interpretation")
+                        st.markdown("### 🤖 AI Interpretation")
                         releases_interpretation = interpreter.interpret_water_releases_chart(result)
                         st.markdown(releases_interpretation)
                 else:
-                    # Standard charts without Interpretation
+                    # Standard charts without AI interpretation
                     # Reservoir levels chart
                     fig_levels = go.Figure()
                     
